@@ -1,0 +1,35 @@
+.app-header {
+  padding: 1.5rem 2rem 0;
+}
+
+.app-header h1 {
+  margin: 0;
+}
+
+.subtitle {
+  margin: 0.25rem 0 1rem;
+  color: #57606a;
+}
+
+nav {
+  display: flex;
+  gap: 0.75rem;
+  border-bottom: 1px solid #d0d7de;
+}
+
+nav a {
+  padding: 0.5rem 0.75rem;
+  text-decoration: none;
+  color: #0969da;
+  border-bottom: 2px solid transparent;
+}
+
+nav a.active {
+  font-weight: 600;
+  border-bottom-color: #0969da;
+}
+
+main {
+  padding: 1.5rem 2rem;
+  max-width: 640px;
+}

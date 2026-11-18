@@ -1,0 +1,40 @@
+<section class="page">
+  <h2>Your books</h2>
+
+  <form class="add-form">
+    <label>
+      Title
+      <input #title name="title" placeholder="e.g. The Hobbit" />
+    </label>
+    <label>
+      Author
+      <input #author name="author" placeholder="e.g. J.R.R. Tolkien" />
+    </label>
+    <button type="submit" (click)="addBook($event, title, author)">Add book</button>
+  </form>
+
+  <p class="summary" data-testid="list-stats">
+    {{ list.stats().read }} of {{ list.stats().total }} read ({{ list.stats().percentComplete }}%)
+  </p>
+
+  <ul class="book-list" data-testid="book-list">
+    @for (book of list.books(); track book.id) {
+      <li [class.read]="book.read">
+        <span class="book-title">{{ book.title }}</span>
+        @if (book.author) {
+          <span class="book-author">by {{ book.author }}</span>
+        }
+        <span class="actions">
+          <button (click)="list.toggleRead(book.id)">
+            {{ book.read ? 'Mark unread' : 'Mark read' }}
+          </button>
+          <button class="danger" (click)="list.remove(book.id)">Remove</button>
+        </span>
+      </li>
+    } @empty {
+      <li class="empty">No books yet — add your first one above.</li>
+    }
+  </ul>
+
+  <app-book-suggestions />
+</section>

@@ -1,0 +1,21 @@
+<section class="page">
+  <h2>Reading stats</h2>
+  <dl class="stats-grid" data-testid="stats">
+    <div class="stat">
+      <dt>Total books</dt>
+      <dd data-testid="stat-total">{{ list.stats().total }}</dd>
+    </div>
+    <div class="stat">
+      <dt>Read</dt>
+      <dd data-testid="stat-read">{{ list.stats().read }}</dd>
+    </div>
+    <div class="stat">
+      <dt>Unread</dt>
+      <dd data-testid="stat-unread">{{ list.stats().unread }}</dd>
+    </div>
+    <div class="stat">
+      <dt>Percent complete</dt>
+      <dd data-testid="stat-percent">{{ list.stats().percentComplete }}%</dd>
+    </div>
+  </dl>
+</section>

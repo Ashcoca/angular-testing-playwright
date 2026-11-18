@@ -1,0 +1,12 @@
+<header class="app-header">
+  <h1>My Reading List</h1>
+  <p class="subtitle">Track the books you want to read</p>
+  <nav>
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Books</a>
+    <a routerLink="/stats" routerLinkActive="active">Stats</a>
+  </nav>
+</header>
+
+<main>
+  <router-outlet />
+</main>

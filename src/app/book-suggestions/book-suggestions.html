@@ -1,0 +1,28 @@
+<section class="suggestions">
+  <h3>Need inspiration?</h3>
+  @switch (state()) {
+    @case ('loading') {
+      <p class="suggestions-state">Loading suggestions…</p>
+    }
+    @case ('error') {
+      <p class="suggestions-state error">
+        Could not load suggestions. Is the API stub running on port 3000?
+      </p>
+    }
+    @case ('ready') {
+      @if (suggestions().length === 0) {
+        <p class="suggestions-state">No suggestions left — you added them all!</p>
+      } @else {
+        <ul class="suggestion-list">
+          @for (suggestion of suggestions(); track suggestion.title) {
+            <li>
+              <span class="book-title">{{ suggestion.title }}</span>
+              <span class="book-author">by {{ suggestion.author }}</span>
+              <button (click)="addSuggestion(suggestion)">Add</button>
+            </li>
+          }
+        </ul>
+      }
+    }
+  }
+</section>
