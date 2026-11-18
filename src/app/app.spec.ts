@@ -22,6 +22,6 @@ describe('App', () => {
     const fixture = TestBed.createComponent(App); // create an instance of App in the test env
     await fixture.whenStable(); // waits for angular to finish setup (render/load) before continuing
     const compiled = fixture.nativeElement as HTMLElement; // grabs DOM element so we can query as html
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, reading-list');
+    expect(compiled.querySelector('h1')?.textContent).toContain('My Reading List');
   });
 });

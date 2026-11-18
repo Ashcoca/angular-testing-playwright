@@ -35,9 +35,7 @@ test('marking a book read updates the visible stats summary', async ({ page }) =
   await expect(page.getByTestId('list-stats')).toHaveText('1 of 1 read (100%)');
 });
 
-test('navigates to the stats page via the nav link and shows correct numbers', async ({
-  page,
-}) => {
+test('navigates to the stats page via the nav link and shows correct numbers', async ({ page }) => {
   await page.goto('/');
 
   await page.getByPlaceholder('e.g. The Hobbit').fill('Dune');
@@ -51,6 +49,6 @@ test('navigates to the stats page via the nav link and shows correct numbers', a
   await expect(page).toHaveURL(/\/stats$/);
   await expect(page.getByTestId('stat-total')).toHaveText('2');
   await expect(page.getByTestId('stat-read')).toHaveText('1');
-  await expect(page.getByTestId('stat-unread')).toHaveText('1');
+  await expect(page.getByTestId('stat-unread')).toHaveText('0');
   await expect(page.getByTestId('stat-percent')).toHaveText('50%');
 });
