@@ -1,4 +1,4 @@
-# Reading List — Testing Demo: Teacher Notes & Student Exercises
+# Reading List — Testing Demo: Student Exercises
 
 A small Angular 22.2 app for teaching three ideas:
 
@@ -12,8 +12,9 @@ A small Angular 22.2 app for teaching three ideas:
 
 ## Requirements
 
-- **Node.js 22.22+** (the Angular 22 CLI refuses older versions).
-- `npm install` once; `npx playwright install chromium` once.
+- **Node.js 22.22+** 
+- `npm install`
+- `npx playwright install chromium`
 
 ## Command cheat-sheet
 
@@ -22,62 +23,24 @@ A small Angular 22.2 app for teaching three ideas:
 | `npm start` | Angular dev server on http://localhost:4200 (proxies `/api` to port 3000) |
 | `npm run serve:api` | Express stub serving `GET /api/suggestions` on port 3000 |
 | `npm test` / `ng test` | Unit tests via Vitest (`@angular/build:unit-test` builder) |
-| `npm run e2e` / `npx playwright test` | Playwright E2E; its `webServer` config starts **both** servers for you |
+| `npm run e2e` / `npx playwright test` | Playwright E2E, its `webServer` config starts **both** servers for you |
 
 ---
 
-## Teacher section — demo script
-
-### Demo 1: don't trust the generated tests (~5 min)
-
-1. Run `ng test`. Point out it is Vitest under the hood (the `@angular/build:unit-test`
-   builder), and that the run is **red**: `App > should render title` fails with
-   `expected 'My Reading List' to contain 'Hello, reading-list'`.
-2. Ask: *is the app broken, or is the test broken?* Open `src/app/app.html` — the header
-   was renamed to **"My Reading List"** when the scaffold placeholder was replaced, but
-   the CLI-generated spec still expects `"Hello, reading-list"`. The **test** went stale.
-3. Fix it live: change the assertion to `'My Reading List'`. Re-run: green. Moral: a
-   passing suite is a claim, not a fact — read failures, don't delete tests to make
-   them go away.
-
-### Demo 2: unit-testing a service's own logic (~5 min)
-
-1. Open `src/app/reading-list.service.ts`: a signal-based store (`add`, `remove`,
-   `toggleRead`) with a `computed` `stats` signal. Note what is **absent**: no
-   `HttpClient`, no `Router`, no DOM.
-2. Open `src/app/reading-list.service.spec.ts`: tests call `new ReadingListService()`
-   directly — no `TestBed`, no provider mocks. Isolation isn't a trick; it's a design
-   outcome.
-3. Highlight one test: `percentComplete` rounding (1 of 3 read → 33). Pure logic gets
-   exhaustive edge-case coverage cheaply.
-
-### Demo 3: Playwright end to end (~15 min, the priority)
-
-1. Run `npx playwright test`. Note the config: `webServer` starts **both** the dev
-   server and the API stub, so tests always run against the real app.
-2. Walk `e2e/reading-list.spec.ts`: each test navigates, acts like a user
-   (`getByRole`, `getByPlaceholder`), and asserts on visible text.
-3. Contrast with the unit tests: here HTTP is real (the suggestions section loads from
-   the Express stub), the router is real, the DOM is real. Unit tests buy *isolation*;
-   E2E buys *confidence the whole thing works*.
-
----
-
-## Student exercises
+## Exercise exercises
 
 Work through these in order. Each exercise's acceptance criterion is the test suite.
 
-### Exercise 1 — Fix the stale spec
+### Exercise 1: Fix the stale spec
 
-Run `npm test`. One test fails. Read the failure message, decide whether the app or the
-test is wrong, and fix the **test**.
+Run `npm test`. One test fails. Read the failure message, decide whether the app or the test is wrong, and fix the **test**.
 
 **Acceptance criteria**
 - `npm test` is fully green (7 tests).
 - You did not change `app.ts` or `app.html` to make it pass.
 - You can say *why* the test was failing, in one sentence.
 
-### Exercise 2 — Unit-test `remove()`
+### Exercise 2: Unit-test `remove()`
 
 `remove(id)` has no tests. Add them to `src/app/reading-list.service.spec.ts`.
 
@@ -86,7 +49,7 @@ test is wrong, and fix the **test**.
 - A test proving `remove()` with an unknown id leaves the list unchanged.
 - Tests follow the existing style: a fresh service per test, no `TestBed`.
 
-### Exercise 3 — Unit-test the `add()` edge cases
+### Exercise 3: Unit-test the `add()` edge cases
 
 Decide and pin down the behaviour for tricky input.
 
@@ -96,7 +59,7 @@ Decide and pin down the behaviour for tricky input.
 - Two books added with the same title both exist (ids differ) — document that
   duplicates are allowed.
 
-### Exercise 4 — Unit-test the stats edge cases
+### Exercise 4: Unit-test the stats edge cases
 
 **Acceptance criteria**
 - A test that `unread = total - read` for a mixed list.
@@ -104,7 +67,7 @@ Decide and pin down the behaviour for tricky input.
 - A test that `percentComplete` returns to `0` when a single book is toggled back to
   unread (empty `read` set, non-empty list).
 
-### Exercise 5 — Extend the Playwright suite
+### Exercise 5: Extend the Playwright suite
 
 Add tests to `e2e/reading-list.spec.ts`.
 
@@ -117,7 +80,7 @@ Add tests to `e2e/reading-list.spec.ts`.
   table renders with zeroed numbers.
 - All tests pass with `npx playwright test`.
 
-### Exercise 6 (harder) — Test the suggestions section with route interception
+### Exercise 6 (harder): Test the suggestions section with route interception
 
 The suggestions section fetches `/api/suggestions`. Use Playwright's
 `page.route()` to intercept that call instead of relying on the Express stub.
@@ -133,8 +96,6 @@ The suggestions section fetches `/api/suggestions`. Use Playwright's
 ---
 
 ## Solutions
-
-*Teacher only — the exercises above are meant to be attempted first.*
 
 **Exercise 1.** The CLI-generated spec expected the scaffold header. Fix:
 
@@ -249,8 +210,3 @@ test('shows the error state when the API fails', async ({ page }) => {
   await expect(page.getByText('Could not load suggestions')).toBeVisible();
 });
 ```
-
-The teaching point for Exercise 6: the component's *collaboration with HttpClient* is
-by definition an integration concern — mocking it at the network edge (in Playwright)
-tests the real component code, whereas faking HttpClient inside a unit test would test
-a mock.
