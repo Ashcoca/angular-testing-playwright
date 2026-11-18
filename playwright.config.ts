@@ -5,6 +5,13 @@ export default defineConfig({
 
   use: {
     baseURL: 'http://localhost:4200',
+    // Uncomment the line below if you want to see the tests in the browser
+    // headless: false,
+
+    // Optional: slows down Playwright operations by 500ms so you can watch them
+    // launchOptions: {
+    // slowMo: 500,
+    // },
   },
 
   // Both servers start before any test runs: the Angular dev server on 4200

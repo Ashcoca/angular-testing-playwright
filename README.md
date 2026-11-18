@@ -25,6 +25,9 @@ Objectives:
 | `npm test` / `ng test` | Unit tests via Vitest (`@angular/build:unit-test` builder) |
 | `npm run e2e` / `npx playwright test` | Playwright E2E, its `webServer` config starts **both** servers for you |
 
+
+> Fun Stuff:
+> Use Playwright UI Mode. Run npx playwright test --ui to open an interactive dashboard with a live browser preview and time-travel debugging
 ---
 
 ## Exercises
