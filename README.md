@@ -34,6 +34,8 @@ Objectives:
 
 Work through these in order. Each exercise's acceptance criterion is the test suite.
 
+**[Vitest Docs for reference](https://vitest.dev/guide/)**
+
 ### Exercise 1: Fix the stale spec
 
 Run `npm test`. One test fails. Read the failure message, decide whether the app or the test is wrong, and fix the **test**.
