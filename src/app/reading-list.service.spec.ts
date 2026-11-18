@@ -56,9 +56,9 @@ describe('ReadingListService', () => {
 
   it('rounds percentComplete to the nearest whole percent', () => {
     // 1 of 3 read = 33.33% -> rounds to 33
-    service.add('Book One');
-    service.add('Book Two');
-    service.add('Book Three');
+    service.add('Dungeon Crawler Carl;');
+    service.add('Carls Doomsday Scenario');
+    service.add('The Dungeon Anarchist Cookbook');
     service.toggleRead(1);
 
     expect(service.stats().percentComplete).toBe(33);
