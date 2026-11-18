@@ -1,6 +1,6 @@
-# Reading List — Testing Demo: Student Exercises
+# Reading List Testing Demo & Student Exercises
 
-A small Angular 22.2 app for teaching three ideas:
+Objectives:
 
 1. **Generated unit tests are not trustworthy by default.** The repo ships with a
    deliberately stale spec that fails under `ng test` (Vitest). Finding and fixing it
@@ -13,8 +13,8 @@ A small Angular 22.2 app for teaching three ideas:
 ## Requirements
 
 - **Node.js 22.22+** 
-- `npm install`
-- `npx playwright install chromium`
+- Run `npm install`
+- Run `npx playwright install chromium`
 
 ## Command cheat-sheet
 
@@ -27,7 +27,7 @@ A small Angular 22.2 app for teaching three ideas:
 
 ---
 
-## Exercise exercises
+## Exercises
 
 Work through these in order. Each exercise's acceptance criterion is the test suite.
 
